@@ -96,6 +96,7 @@ const getCityName = (city) => {
 
 // console.log("________________________________________current________________________________________________2")
 const getWeather = async (id) => {
+    showLoadingSpinner();
     let cityName = document.getElementById('cityName');
     cityName.innerHTML = locations.name;
     const url = `https://foreca-weather.p.rapidapi.com/current/${id}?alt=0&tempunit=C&windunit=KMH&lang=en`;
@@ -109,7 +110,6 @@ const getWeather = async (id) => {
 
     try {
         (async () => {
-            showLoadingSpinner();
             const response = await fetch(url, options);
 
             if (!response.ok) {
@@ -220,16 +220,17 @@ const getWeather = async (id) => {
                 windSpeed2.innerHTML = data.windSpeed;
             }
 
-
+            hideLoadingSpinner();
         })();
     } catch (error) {
-        hideLoadingSpinner();
         console.error(error);
+        hideLoadingSpinner();
     }
 }
 
 // console.log("________________________________________hourly_____________________________________________3")
 const getHourlyWeather = (id) => {
+    showLoadingSpinner();
     const url = `https://foreca-weather.p.rapidapi.com/forecast/hourly/${id}?alt=0&tempunit=C&windunit=KMH&periods=16&dataset=full`;
     const options = {
         method: 'GET',
@@ -310,19 +311,20 @@ const getHourlyWeather = (id) => {
                 hourTemp[7].innerHTML = hourlyTemp(15);
             }
         })();
-    } catch (error) {
         hideLoadingSpinner();
+    } catch (error) {
         console.error(error);
+        hideLoadingSpinner();
     }
 
 
 }
 
-
 // console.log("__________________________________________Daily_____________________________________________3")
 
 let forecastWeather;
 const getDailyWeather = (id) => {
+    showLoadingSpinner();
     const url = `https://foreca-weather.p.rapidapi.com/forecast/daily/${id}?alt=0&tempunit=C&windunit=KMH&periods=8&dataset=full`;
     const options = {
         method: 'GET',
@@ -506,9 +508,9 @@ const getDailyWeather = (id) => {
                     moonPhase.innerHTML = data[0].moonPhase;
                 }
 
-                hideLoadingSpinner();
-
+                
                 resolve(forecastWeather)
+                hideLoadingSpinner();
             })();
         } catch (error) {
             hideLoadingSpinner();
@@ -519,27 +521,24 @@ const getDailyWeather = (id) => {
 }
 
 
-
-
-
 // console.log("__________________________________________Get city_____________________________________________4")
 
 
 // console.log(dailyTempChart)
 
 
-    (async () => {
-        await getCityName("bahawalpur");
-        console.log(locations)
-        await getWeather(locationId);
-        await getHourlyWeather(locationId);
-        await getDailyWeather(locationId);
+(async () => {
+    await getCityName("bahawalpur");
+    console.log(locations)
+    await getWeather(locationId);
+    await getHourlyWeather(locationId);
+    await getDailyWeather(locationId);
 
-        await dailyTempChart(locationId);
-        // console.log(locationId)
+    await dailyTempChart(locationId);
+    // console.log(locationId)
 
 
-    })();
+})();
 
 let submit = document.getElementById('submit');
 let cityInput = document.getElementById('cityInput');
