@@ -1,0 +1,32 @@
+@media screen and (max-width: 700px) {
+    .hidden-container {
+        height: unset;
+    }
+
+
+
+    
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .temp {
+        margin: 0;
+    }
+
+    .card2 {
+        margin: 20px 0 0 0;
+    }
+
+    .symbol {
+        margin: 14px 0 0 0;
+    }
+
+    .loader {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+}

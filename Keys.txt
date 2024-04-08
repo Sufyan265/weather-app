@@ -1,0 +1,26 @@
+Burewala LocationID:
+101182092 
+
+
+Bahawalpur LocationID:
+101183880
+
+California LocationID:
+104350049
+
+
+forcara weather API  key:
+f2c179e824msh22acf5d7dc3bb20p155cb3jsn707788328deb
+
+forcara weather API  2nd (2654) key:
+67fa3dc230msh361cff959de71d5p153b9ejsned2f1d5f1e18
+
+forcara weather API  2nd (adsense) key:
+8d357caa21msh56db0d7ddcbe59cp174043jsn8bfbf00089c5
+
+
+
+Pixel API key:
+6XAdNHo5EppQFYKWfWmo0PburYM6adxbZHq1slpsWuLYfPdxNF22Vz5z
+
+

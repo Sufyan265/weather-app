@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/symbols/FavIcon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"></script>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/Responsive-style.css">
+    <title>Cloud Chaser Weather</title>
+
+</head>
+
+<body>
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/index.html"><strong>Cloud</strong>Chaser</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <!--___________________________________________________________2") -->
+
+    <div class="background">
+        <div class="container">
+            <div class="mx-auto row d-flex justify-content-center main">
+                <div class="row card0">
+                    <div class="card1 col-lg-8 col-md-7">
+                        <div class="section1 d-flex justify-content-between">
+                            <div class="country-info-section">
+                                <div class="country-info">
+                                    <p>Time zone: <span id="timezone">--------</span></p>
+                                    <p>Latitude: <span id="lat">--.--</span></p>
+                                    <p>Longitude: <span id="lon">--.--</span></p>
+                                </div>
+                                <div class="country-info">
+                                    <p>Country: <span id="country">--------</span></p>
+                                    <p>Admin area: <span id="adminArea">------</span></p>
+                                    <p>Admin area2: <span id="adminArea2">------</span></p>
+                                </div>
+                            </div>
+
+                            <div class="sun-container">
+                                <div class="cloud front">
+                                    <span class="left-front"></span>
+                                    <span class="right-front"></span>
+                                </div>
+                                <span class="sun sunshine"></span>
+                                <span class="sun"></span>
+                                <div class="cloud back">
+                                    <span class="left-back"></span>
+                                    <span class="right-back"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="info px-3">
+                            <div class="favorite-section">
+
+                                <button class="favorite-btn btn-active" id='addCityButton'>
+
+                                    <div class="img-wrapper-1">
+                                        <div class="favorite-img-wrapper">
+                                            <img src="/Image/favorite-heart.svg" alt="" width="30px">
+                                        </div>
+                                    </div>
+                                    <span>Fav</span>
+                                </button>
+
+                                <div class="loader">
+                                    <div class="justify-content-center jimu-primary-loading" id="loading"></div>
+                                </div>
+                            </div>
+
+                            <div class="temp-city-symbol row">
+                                <h2 class="large-font mr-4 temp"><span id="temperature">--</span>&#176;c</h2>
+                                <div class="d-flex flex-column mr-3 cityName-container">
+                                    <h2 class="mt-2 mb-0" id="cityName">Bahawalpur</h2>
+                                    <p id="time">10:36 - Friday, 01 Sep '23</p>
+                                </div>
+                                <div class="d-flex flex-column text-center">
+                                    <div id="symbolBox">
+                                        <img class="symbol" src="symbols/Default symbol.svg" alt="Clear symbol">
+                                    </div>
+                                    <p class="symbol-phrase" id="symbolPhrase">-------</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="hourlyContainer" class="hourly-container">
+                            <div class="hourly-card d-flex flex-wrap">
+                                <div class="hourly-box d-flex flex-column justify-content-around align-items-center">
+                                    <span class="hourly-time">-- AM</span>
+                                    <span class="hourly-symbol"><img src="symbols/Default symbol.svg"
+                                            alt="Symbol"></span>
+                                    <span><span class="hourly-temp">--</span>&deg;c</span>
+                                </div>
+                                <div class="hourly-box d-flex flex-column justify-content-around align-items-center">
+                                    <span class="hourly-time">-- AM</span>
+                                    <span class="hourly-symbol"><img src="symbols/Default symbol.svg"
+                                            alt="Symbol"></span>
+                                    <span><span class="hourly-temp">--</span>&deg;c</span>
+                                </div>
+                                <div class="hourly-box d-flex flex-column justify-content-around align-items-center">
+                                    <span class="hourly-time">-- AM</span>
+                                    <span class="hourly-symbol"><img src="symbols/Default symbol.svg"
+                                            alt="Symbol"></span>
+                                    <span><span class="hourly-temp">--</span>&deg;c</span>
+                                </div>
+                                <div class="hourly-box d-flex flex-column justify-content-around align-items-center">
+                                    <span class="hourly-time">-- AM</span>
+                                    <span class="hourly-symbol"><img src="symbols/Default symbol.svg"
+                                            alt="Symbol"></span>
+                                    <span><span class="hourly-temp">--</span>&deg;c</span>
+                                </div>
+                                <div class="hourly-box d-flex flex-column justify-content-around align-items-center">
+                                    <span class="hourly-time">-- AM</span>
+                                    <span class="hourly-symbol"><img src="symbols/Default symbol.svg"
+                                            alt="Symbol"></span>
+                                    <span><span class="hourly-temp">--</span>&deg;c</span>
+                                </div>
+                                <div class="hourly-box d-flex flex-column justify-content-around align-items-center">
+                                    <span class="hourly-time">-- AM</span>
+                                    <span class="hourly-symbol"><img src="symbols/Default symbol.svg"
+                                            alt="Symbol"></span>
+                                    <span><span class="hourly-temp">--</span>&deg;c</span>
+                                </div>
+                                <div class="hourly-box d-flex flex-column justify-content-around align-items-center">
+                                    <span class="hourly-time">-- AM</span>
+                                    <span class="hourly-symbol"><img src="symbols/Default symbol.svg"
+                                            alt="Symbol"></span>
+                                    <span><span class="hourly-temp">--</span>&deg;c</span>
+                                </div>
+                                <div class="hourly-box d-flex flex-column justify-content-around align-items-center">
+                                    <span class="hourly-time">-- AM</span>
+                                    <span class="hourly-symbol"><img src="symbols/Default symbol.svg"
+                                            alt="Symbol"></span>
+                                    <span><span class="hourly-temp">--</span>&deg;c</span>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card2 col-lg-4 col-md-5">
+                        <div class="input-box-container">
+                            <div class="row input-box">
+                                <input id="cityInput" type="text" name="location" placeholder="Another city"
+                                    class="location-input" autocomplete="off">
+                                <div id="submit" class="fa fa-search mr-0 text-center search-icon"></div>
+
+
+
+
+                                <div id="suggestions">
+                                    <div class="overlay2"></div>
+                                    <div id="suggestionLoading">
+                                        <img src="/fazul/Illustration-of-Loading-icon-on-transparent-background-PNG.png"
+                                            alt="Loading..." width="40px">
+                                    </div>
+                                    <ul></ul>
+                                </div>
+                            </div>
+                            <div class="input-down-error" id="popup">
+                                <p>This city is not available</p>
+                            </div>
+                        </div>
+                        <div class="mr-5 aside-detail">
+                            <p class="Favorite-city-heading">Favorite city</p>
+                            <div class="favorite-city-container">
+                                <div class="other-city-container">
+                                    <ul>
+                                        <li class="light-text animation-text" id="burewala">Burewala</li>
+                                        <li class="light-text animation-text" id="newYork">New York</li>
+                                        <li class="light-text animation-text" id="paris">Paris</li>
+                                        <li class="light-text animation-text" id="california">California</li>
+                                    </ul>
+                                </div>
+
+                                <div class="other-city-container">
+                                    <ul id="favoriteList"></ul>
+                                </div>
+
+                            </div>
+                            <div class="line"></div>
+
+                            <p>Weather Details</p>
+
+                            <div class="row px-3 detail">
+                                <p class="light-text">Cloudy</p>
+                                <p class="ml-auto"><span id="cloudiness">--</span> %</p>
+                            </div>
+                            <div class="row px-3 detail">
+                                <p class="light-text">Humidity</p>
+                                <p class="ml-auto"><span id="relHumidity">--</span> %</p>
+                            </div>
+                            <div class="row px-3 detail">
+                                <p class="light-text">Wind</p>
+                                <p class="ml-auto"><span id="windSpeed">--</span> km/h</p>
+                            </div>
+                            <div class="row px-3 detail">
+                                <p class="light-text">Rain</p>
+                                <p class="ml-auto"><span id="precipRate">--</span> mm</p>
+                            </div>
+                            <div class="row px-3 detail">
+                                <p class="light-text">Feels like</p>
+                                <p class="ml-auto"><span id="feelsLikeTemp">--</span>&deg;C</p>
+                            </div>
+
+                            <div class="line mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="daily-container d-flex flex-wrap">
+
+                <div class="hidden-container">
+                    <div class="daily-card">
+                        <div class="daily-box d-flex flex-column justify-content-around align-items-center">
+                            <span class="daily-date">--/--/--</span>
+                            <span class="daily-day">Mon</span>
+                            <span class="daily-symbol">
+                                <img src="symbols/Default symbol.svg" alt="Symbol" width="40px">
+                            </span>
+                            <span class="daily-temp"><span class="daily-max-temp">--</span>&deg;c /<span
+                                    class="daily-min-style"><span class="daily-min-temp">--</span>&deg;c</span></span>
+                        </div>
+                    </div>
+                    <div class="daily-hidden-content">
+                        <p>Humidity <span><span class="daily-humidity">--</span> /<span
+                                    class="daily-min-hum daily-min-style2">--</span>&deg;C</span></p>
+                        <p>Wind <span><span class="daily-wind">--</span> km/h</span></p>
+                        <p>Rain <span><span class="daily-rain">--</span> mm</span></p>
+                        <p>Sky <span>"<span class="daily-sky">----</span>"</span></p>
+                    </div>
+                </div>
+
+                <div class="hidden-container">
+                    <div class="daily-card">
+                        <div class="daily-box d-flex flex-column justify-content-around align-items-center">
+                            <span class="daily-date">--/--/--</span>
+                            <span class="daily-day">Mon</span>
+                            <span class="daily-symbol">
+                                <img src="symbols/Default symbol.svg" alt="Symbol" width="40px">
+                            </span>
+                            <span class="daily-temp"><span class="daily-max-temp">--</span>&deg;c /<span
+                                    class="daily-min-style"><span class="daily-min-temp">--</span>&deg;c</span></span>
+                        </div>
+                    </div>
+                    <div class="daily-hidden-content">
+                        <p>Humidity <span><span class="daily-humidity">--</span> /<span
+                                    class="daily-min-hum daily-min-style2">--</span>&deg;C</span></p>
+                        <p>Wind <span><span class="daily-wind">--</span> km/h</span></p>
+                        <p>Rain <span><span class="daily-rain">--</span> mm</span></p>
+                        <p>Sky <span>"<span class="daily-sky">----</span>"</span></p>
+                    </div>
+                </div>
+
+                <div class="hidden-container">
+                    <div class="daily-card">
+                        <div class="daily-box d-flex flex-column justify-content-around align-items-center">
+                            <span class="daily-date">--/--/--</span>
+                            <span class="daily-day">Mon</span>
+                            <span class="daily-symbol">
+                                <img src="symbols/Default symbol.svg" alt="Symbol" width="40px">
+                            </span>
+                            <span class="daily-temp"><span class="daily-max-temp">--</span>&deg;c /<span
+                                    class="daily-min-style"><span class="daily-min-temp">--</span>&deg;c</span></span>
+                        </div>
+                    </div>
+                    <div class="daily-hidden-content">
+                        <p>Humidity <span><span class="daily-humidity">--</span> /<span
+                                    class="daily-min-hum daily-min-style2">--</span>&deg;C</span></p>
+                        <p>Wind <span><span class="daily-wind">--</span> km/h</span></p>
+                        <p>Rain <span><span class="daily-rain">--</span> mm</span></p>
+                        <p>Sky <span>"<span class="daily-sky">----</span>"</span></p>
+                    </div>
+                </div>
+
+                <div class="hidden-container">
+                    <div class="daily-card">
+                        <div class="daily-box d-flex flex-column justify-content-around align-items-center">
+                            <span class="daily-date">--/--/--</span>
+                            <span class="daily-day">Mon</span>
+                            <span class="daily-symbol">
+                                <img src="symbols/Default symbol.svg" alt="Symbol" width="40px">
+                            </span>
+                            <span class="daily-temp"><span class="daily-max-temp">--</span>&deg;c /<span
+                                    class="daily-min-style"><span class="daily-min-temp">--</span>&deg;c</span></span>
+                        </div>
+                    </div>
+                    <div class="daily-hidden-content">
+                        <p>Humidity <span><span class="daily-humidity">--</span> /<span
+                                    class="daily-min-hum daily-min-style2">--</span>&deg;C</span></p>
+                        <p>Wind <span><span class="daily-wind">--</span> km/h</span></p>
+                        <p>Rain <span><span class="daily-rain">--</span> mm</span></p>
+                        <p>Sky <span>"<span class="daily-sky">----</span>"</span></p>
+                    </div>
+                </div>
+
+                <div class="hidden-container">
+                    <div class="daily-card">
+                        <div class="daily-box d-flex flex-column justify-content-around align-items-center">
+                            <span class="daily-date">--/--/--</span>
+                            <span class="daily-day">Mon</span>
+                            <span class="daily-symbol">
+                                <img src="symbols/Default symbol.svg" alt="Symbol" width="40px">
+                            </span>
+                            <span class="daily-temp"><span class="daily-max-temp">--</span>&deg;c /<span
+                                    class="daily-min-style"><span class="daily-min-temp">--</span>&deg;c</span></span>
+                        </div>
+                    </div>
+                    <div class="daily-hidden-content">
+                        <p>Humidity <span><span class="daily-humidity">--</span> /<span
+                                    class="daily-min-hum daily-min-style2">--</span>&deg;C</span></p>
+                        <p>Wind <span><span class="daily-wind">--</span> km/h</span></p>
+                        <p>Rain <span><span class="daily-rain">--</span> mm</span></p>
+                        <p>Sky <span>"<span class="daily-sky">----</span>"</span></p>
+                    </div>
+                </div>
+
+                <div class="hidden-container">
+                    <div class="daily-card">
+                        <div class="daily-box d-flex flex-column justify-content-around align-items-center">
+                            <span class="daily-date">--/--/--</span>
+                            <span class="daily-day">Mon</span>
+                            <span class="daily-symbol">
+                                <img src="symbols/Default symbol.svg" alt="Symbol" width="40px">
+                            </span>
+                            <span class="daily-temp"><span class="daily-max-temp">--</span>&deg;c /<span
+                                    class="daily-min-style"><span class="daily-min-temp">--</span>&deg;c</span></span>
+                        </div>
+                    </div>
+                    <div class="daily-hidden-content">
+                        <p>Humidity <span><span class="daily-humidity">--</span> /<span
+                                    class="daily-min-hum daily-min-style2">--</span>&deg;C</span></p>
+                        <p>Wind <span><span class="daily-wind">--</span> km/h</span></p>
+                        <p>Rain <span><span class="daily-rain">--</span> mm</span></p>
+                        <p>Sky <span>"<span class="daily-sky">----</span>"</span></p>
+                    </div>
+                </div>
+
+                <div class="hidden-container">
+                    <div class="daily-card">
+                        <div class="daily-box d-flex flex-column justify-content-around align-items-center">
+                            <span class="daily-date">--/--/--</span>
+                            <span class="daily-day">Mon</span>
+                            <span class="daily-symbol">
+                                <img src="symbols/Default symbol.svg" alt="Symbol" width="40px">
+                            </span>
+                            <span class="daily-temp"><span class="daily-max-temp">--</span>&deg;c /<span
+                                    class="daily-min-style"><span class="daily-min-temp">--</span>&deg;c</span></span>
+                        </div>
+                    </div>
+                    <div class="daily-hidden-content">
+                        <p>Humidity <span><span class="daily-humidity">--</span> /<span
+                                    class="daily-min-hum daily-min-style2">--</span>&deg;C</span></p>
+                        <p>Wind <span><span class="daily-wind">--</span> km/h</span></p>
+                        <p>Rain <span><span class="daily-rain">--</span> mm</span></p>
+                        <p>Sky <span>"<span class="daily-sky">----</span>"</span></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- __________________________________________sun & moon set________________________________________________ -->
+
+
+    <section class="background2">
+        <div class="container">
+            <div class="daily-chart-container">
+                <div class="daily-chart" id="chartContainer" style="height: 370px; width: 100%; position: relative">
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+            <div class="daily-detail-container">
+                <h3 class="daily-detail">Daily Details</h3>
+                <div class="daily-detail-section">
+                    <!-- <div class="SunMoon-section"> -->
+                    <div class="sunMoon-container">
+                        <div class="sunMoon-box">
+                            <div class="sun-style rise-box">
+                                <img class="sunset-img" src="/Image/Sunrise.svg" alt="Sunrise-icon" width="90px">
+                                <p class="sun-heading-style">Sunrise</p>
+                                <p id="sunRiseTime">--:-- AM</p>
+                            </div>
+                            <div class="sun-style set-box">
+                                <img class="sunset-img" src="/Image/Sunset.svg" alt="Sunset-icon" width="90px">
+                                <p class="sun-heading-style">Sunset</p>
+                                <p id="sunSetTime">--:-- PM</p>
+                            </div>
+                        </div>
+                        <div class="sunMoon-box">
+                            <div class="moon-boxs">
+                                <div class="sun-style rise-box">
+                                    <img class="sunset-img" src="/Image/Moonrise.svg" alt="Moonrise-icon" width="90px">
+                                    <p class="sun-heading-style">Moonrise</p>
+                                    <p id="moonRiseTime">--:-- AM</p>
+                                </div>
+                                <div class="sun-style set-box">
+                                    <img class="sunset-img" src="/Image/Moonset.svg" alt="Moonset-icon" width="90px">
+                                    <p class="sun-heading-style">Moonset</p>
+                                    <p id="moonSetTime">--:-- PM</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="moon-phase">Moon phase: <span id="moonPhase">--</span>&deg;</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="rain-chance-container">
+                        <div class="rain-content">
+                            Rain is expected on the following days:
+                        </div>
+                    </div>
+                </div> -->
+
+                    <div class="percentage-container">
+                        <div class="percentage-section">
+                            <div class="percentage">
+                                <p class="percentage-heading">Precipitation probability</p>
+                                <svg class="percentage-svg" style="width: 120px;" viewBox="0 0 100 100"
+                                    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" data-value="20">
+                                    <circle class="percentage-circle" r="45" cx="50" cy="50" />
+                                    <path class="percentage-meter" d="M5,50a45,45 0 1,0 90,0a45,45 0 1,0 -90,0"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-dashoffset="282.78302001953125" stroke-dasharray="282.78302001953125" />
+                                    <text class="percentage-text" x="50" y="50"></text>
+                                </svg>
+                            </div>
+
+                            <div class="percentage">
+                                <p class="percentage-heading">Dew point</p>
+                                <svg class="percentage-svg" style="width: 120px;" viewBox="0 0 100 100"
+                                    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" data-value="0">
+                                    <circle class="percentage-circle" r="45" cx="50" cy="50" />
+                                    <path class="percentage-meter" d="M5,50a45,45 0 1,0 90,0a45,45 0 1,0 -90,0"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-dashoffset="282.78302001953125" stroke-dasharray="282.78302001953125" />
+                                    <text class="percentage-text" x="50" y="50"></text>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="percentage-section">
+                            <div class="percentage">
+                                <p class="percentage-heading">UV Index</p>
+                                <!-- <span>Low</span> -->
+                                <svg class="percentage-svg" style="width: 120px;" viewBox="0 0 100 100"
+                                    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" data-value="0">
+                                    <circle class="percentage-circle" r="45" cx="50" cy="50" />
+                                    <path class="percentage-meter" d="M5,50a45,45 0 1,0 90,0a45,45 0 1,0 -90,0"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-dashoffset="282.78302001953125" stroke-dasharray="282.78302001953125" />
+                                    <text class="percentage-text" x="50" y="43"></text>
+                                    <text class="percentage-text uvIndex-level" x="50" y="63">Moderate</text>
+                                </svg>
+                            </div>
+                            <div class="percentage">
+                                <p class="percentage-heading">Wind direction</p>
+                                <div class="windDir-compass" style="width: 115px;">
+                                    <div class="direction-label north">N</div>
+                                    <div class="direction-label south">S</div>
+                                    <div class="direction-label west">W</div>
+                                    <div class="direction-label east">E</div>
+                                    <div class="direction">
+                                        <p id="windDir">NE</p>
+                                        <p class="compass-windSpeed"><span id="windSpeed2">--</span> km/h</p>
+                                    </div>
+                                    <div class="windDir-arrow NE"></div>
+                                    <svg class="windDir-svg NE" viewBox='0 0 100 100'>
+                                        <circle class="windDir-circle" cx='50' cy='50' r='48' />
+                                        <circle class="windDir-circle" cx='50' cy='50' r='48' />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+
+    <script src="/API.js"></script>
+    <script src="/script.js"></script>
+</body>
+
+</html>
